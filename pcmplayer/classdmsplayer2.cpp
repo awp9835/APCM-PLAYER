@@ -44,7 +44,7 @@ DMSPlayer::DMSPlayer(DSCreated* dsCreated, UINT32 BufferSeconds)
 
 void DMSPlayer::SafeSleep(INT32 nms)
 {
-	INT32 t, m,i;
+	/*INT32 t, m,i;
 	if (nms < 0) nms = 0;
 	t = nms / 20;
 	m = nms % 20;
@@ -53,7 +53,8 @@ void DMSPlayer::SafeSleep(INT32 nms)
 		Sleep(20);
 		if (!Playing|ReadyForExit)return;
 	}
-	Sleep(m);
+	Sleep(m);*/
+	Sleep(100);
 }
 
 DMSPlayer::~DMSPlayer()
@@ -194,7 +195,7 @@ void DSPlayer::PlayThread()
 	DSBuffer->Unlock(pDestBuffer, DmspDesc.dwBufferBytes, NULL, 0);
 	ThreadWait = FALSE;
 	DSBuffer->Play(0, 0, 0);
-	SafeSleep(INT32(UINT64(buffersize) * 1000 /  nAvgBytesPerSecond) - 50);
+	SafeSleep(INT32(UINT64(buffersize) * 1000 /  nAvgBytesPerSecond) - 100);
 	while (1)
 	{
 		if (ReadyForExit)
@@ -313,7 +314,7 @@ void DSBGMPlayer::PlayThread()
 			memcpy(pDestBuffer, Sound.base + Sound.offset + MCursor,(Sound.size - MCursor>0)?(Sound.size - MCursor):0);
 			DSBuffer->Unlock(pDestBuffer, DmspDesc.dwBufferBytes, NULL, 0);
 			DSBuffer->Play(0, 0, 0);
-			SafeSleep(INT32(UINT64(Sound.size - MCursor) * 1000 * BGMBufferSeconds / buffersize) - 50);
+			SafeSleep(INT32(UINT64(Sound.size - MCursor) * 1000 * BGMBufferSeconds / buffersize) - 100);
 			while (1)
 			{
 				if (ReadyForExit)
@@ -353,7 +354,7 @@ void DSBGMPlayer::PlayThread()
 			DSBuffer->Unlock(pDestBuffer, DmspDesc.dwBufferBytes, NULL, 0);
 			MCursor += buffersize;
 			DSBuffer->Play(0, 0, 0);
-			SafeSleep(INT32(BGMBufferSeconds) * 1000 - 50);
+			SafeSleep(INT32(BGMBufferSeconds) * 1000 - 100);
 		}
 	}
 

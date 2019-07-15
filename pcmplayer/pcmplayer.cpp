@@ -2,6 +2,7 @@
 #include "classdmsplayer2.h"
 HWND hwnd = 0;
 DSBGMPlayer *Player;
+//DSPlayer *SPlayer;
 DSCreated *dc;
 LPBYTE fileBuffer = NULL;
 DmspSound Sound;
@@ -78,6 +79,8 @@ void OpenAndPlay()
 		Sound.size = (INT32)fsize;
 		printf("开始播放\n");
 		Player->ChangeAndPlay(Sound);
+		//
+		//SPlayer->Play(Sound);
 		AfterPlay();
 	}
 	else
@@ -101,6 +104,7 @@ int main()
 		return 0;
 	}
 	Player = new DSBGMPlayer(dc);
+	//SPlayer = new DSPlayer(dc);
 	while (1) 
 	{
 		select = 0;
