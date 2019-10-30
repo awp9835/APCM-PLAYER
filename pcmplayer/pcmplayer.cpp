@@ -49,7 +49,7 @@ void OpenAndPlay()
 	{
 		fp = NULL;
 		wprintf(L"%s\n", Str2);
-		fp = _wfopen(Str2, L"r");
+		fp = _wfopen(Str2, L"rb");
 		if (!fp) 
 		{
 			printf("未能打开文件，错误代码：%d\n", GetLastError());
@@ -58,6 +58,9 @@ void OpenAndPlay()
 		{
 			Player->Stop();
 			while (Player->isPlaying());
+			Player->Stop();
+			while (Player->isPlaying());
+			//注意两次刹车确保安全
 			delete fileBuffer;
 			fileBuffer = NULL;
 		}
