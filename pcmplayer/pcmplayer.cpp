@@ -37,7 +37,7 @@ void AfterPlay()
 	}
 
 }
-void OpenAndPlay() 
+void OpenAndPlay(char* cmdpara = NULL) 
 {
 	memset(&opfn, 0, sizeof(opfn));
 	opfn.lStructSize = sizeof(opfn);
@@ -45,11 +45,19 @@ void OpenAndPlay()
 	opfn.lpstrFilter = Str1;
 	opfn.lpstrFile = Str2;
 	opfn.nMaxFile = 4096;
-	if (GetOpenFileNameW(&opfn))
+	if (cmdpara ||GetOpenFileNameW(&opfn))
 	{
 		fp = NULL;
-		wprintf(L"%s\n", Str2);
-		fp = _wfopen(Str2, L"rb");
+		if (cmdpara)
+		{
+			printf("%s\n", cmdpara);
+			fp = fopen(cmdpara, "rb");
+		}
+		else
+		{
+			wprintf(L"%s\n", Str2);
+			fp = _wfopen(Str2, L"rb");
+		}
 		if (!fp) 
 		{
 			printf("未能打开文件 Failed，错误代码 Error code：%d\n\n", GetLastError());
@@ -89,9 +97,10 @@ void OpenAndPlay()
 	}
 
 }
-int main()
+int main(int argc ,char** argv)
 {
 	int select;
+	BOOL opencmd = (argc >= 2);
 	SetConsoleTitleA("AWPSOFT Sound Track Player");
 	while (!hwnd)
 	{
@@ -110,18 +119,27 @@ int main()
 	while (1) 
 	{
 		select = 0;
-		printf("请选择 Select：1.打开 Open  2.退出 Exit\n\n");
-		scanf("%d", &select);
-		switch (select) 
+		if (opencmd)
 		{
-		case 1:
-			OpenAndPlay();
-			break;
-		case 2:
-			return 0;
-		default:
-			break;
+			opencmd = FALSE;
+			OpenAndPlay(argv[1]);
 		}
+		else
+		{
+			printf("请选择 Select：1.打开 Open  2.退出 Exit\n\n");
+			scanf("%d", &select);
+			switch (select)
+			{
+			case 1:
+				OpenAndPlay();
+				break;
+			case 2:
+				return 0;
+			default:
+				break;
+			}
+		}
+		
 	}
 	return 0;
 }
