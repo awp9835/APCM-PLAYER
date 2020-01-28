@@ -77,8 +77,10 @@ private:
 	DmspSound PauseBGM;
 	DWORD BGMBufferSeconds;
 	void PlayThread();
-	static void PlayThreadCaller(LPVOID ThisPtr);
-public:
+	static void PlayThreadCaller(LPVOID ThisPtr); 
+	volatile std::atomic<BYTE*>ActivedBuffer;
+public:	
+	BOOL IsSourceBufferSafeToRelease(BYTE * Base);
 	volatile std::atomic<INT32> MCursor;
 	void ChangeAndPlay(DmspSound s); //Replace and play NOT immediately 
 	void Stop();	//NOT immediately
