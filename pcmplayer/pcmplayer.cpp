@@ -115,7 +115,7 @@ int main(int argc ,char** argv)
 	Player = new DSBGMPlayer(dc);
 	//SPlayer = new DSPlayer(dc);
 	printf("AWPSOFT音轨播放器 支持 16位双声道44100Hz .pcm/.wav/.dat 音轨播放。\n");
-	printf("AWPSOFT Sound Track Player for playing 16bits-44100Hz-stereo sound tracks (.pcm/.wav/.dat) \n\n");
+	printf("AWPSOFT Sound Track Player for playing stereo-16bits-44100Hz sound tracks (.pcm/.wav/.dat) \n\n");
 	while (1) 
 	{
 		select = 0;
