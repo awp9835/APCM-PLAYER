@@ -54,20 +54,6 @@ public:
 	BOOL isEnable();//if created successful
 	BOOL isPlaying();
 };
-class DSPlayer : public DMSPlayer
-{
-private:
-	void PlayThread();
-	static void PlayThreadCaller(LPVOID ThisPtr);
-public:
-	void Replay();	//stop and replay immediately
-	void Play(DmspSound s); //Replace and play immediately 
-	void Stop();
-	void Pause();
-	void Continue();
-	DSPlayer(DSCreated* dsCreated, UINT32 MaximumSeconds = 10);
-	~DSPlayer();
-};
 class DSBGMPlayer : public DMSPlayer
 {
 private:

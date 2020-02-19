@@ -61,6 +61,7 @@ void OpenAndPlay(char* cmdpara = NULL)
 		if (!fp) 
 		{
 			printf("未能打开文件 Failed，错误代码 Error code：%d\n\n", GetLastError());
+			return;
 		}
 		if (fileBuffer)
 		{
