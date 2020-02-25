@@ -61,7 +61,7 @@ void DMSPlayer::SafeSleep(INT32 nms)
 		if (!Playing|ReadyForExit)return;
 	}
 	Sleep(m);*/
-	Sleep(7);
+	Sleep(100);
 }
 
 DMSPlayer::~DMSPlayer()
