@@ -61,7 +61,7 @@ void DMSPlayer::SafeSleep(INT32 nms)
 		if (!Playing|ReadyForExit)return;
 	}
 	Sleep(m);*/
-	Sleep(100);
+	Sleep(7);
 }
 
 DMSPlayer::~DMSPlayer()
@@ -251,6 +251,7 @@ void DSBGMPlayer::PlayThread()
 				}
 				DSBuffer->GetCurrentPosition(&P1, &P2);
 				if (!P1)break;
+				Sleep(1);
 			}
 			DSBuffer->Lock(0, DmspDesc.dwBufferBytes, &pDestBuffer, &DmspDesc.dwBufferBytes, NULL, 0, DSBLOCK_ENTIREBUFFER);
 			memcpy(pDestBuffer, Sound.base + Sound.offset + MCursor, buffersize);
